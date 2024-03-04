@@ -907,26 +907,32 @@ def monster_task(
 class StatsBuilder:
     def __init__(self) -> None:
         self.history: T.List[Stats] = []
+        self.index: int = -1
 
     def roll(self) -> Stats:
-        values: T.Dict[StatType, int] = {
-            stat: 3 + random.below(6) + random.below(6) + random.below(6)
-            for stat in PRIME_STATS
-        }
-        values[StatType.hp_max] = (
-            random.below(8) + values[StatType.condition] // 6
-        )
-        values[StatType.mp_max] = (
-            random.below(8) + values[StatType.intelligence] // 6
-        )
-        stats = Stats(values)
-        self.history.append(stats)
-        return stats
+        if self.index >= len(self.history) - 1:
+            values: T.Dict[StatType, int] = {
+                stat: 3 + random.below(6) + random.below(6) + random.below(6)
+                for stat in PRIME_STATS
+            }
+            values[StatType.hp_max] = (
+                random.below(8) + values[StatType.condition] // 6
+            )
+            values[StatType.mp_max] = (
+                random.below(8) + values[StatType.intelligence] // 6
+            )
+            stats = Stats(values)
+            self.history.append(stats)
+            self.index = len(self.history) - 1
+            return stats
+        else:
+            self.index += 1
+            return self.history[self.index]
 
     def unroll(self) -> Stats:
-        if len(self.history) > 1:
-            self.history.pop()
-        return self.history[-1]
+        if self.index > 0:
+            self.index -= 1
+        return self.history[self.index]
 
 
 def create_player(
