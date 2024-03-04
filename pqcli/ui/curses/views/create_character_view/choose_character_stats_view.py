@@ -95,7 +95,7 @@ class ChooseCharacterStatsView(BaseView):
         with focus_standout(self._active_widget == 1, self._win):
             self._win.addstr(3 + stats_h + 1, 0, "[F6   ] Unroll")
         with focus_standout(self._active_widget == 2, self._win):
-            self._win.addstr(3 + stats_h + 2, 0, "[F10  ] Continue")
+            self._win.addstr(3 + stats_h + 2, 0, "[F10  ] Sold!")
         with focus_standout(self._active_widget == 3, self._win):
             self._win.addstr(3 + stats_h + 3, 0, "[Esc  ] Cancel")
         self._win.noutrefresh()
