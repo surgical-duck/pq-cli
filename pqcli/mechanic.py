@@ -367,20 +367,31 @@ class Player(SignalMixin):
         self.emit("level_up")
 
     def win_stat(self) -> bool:
+
+        def square(x):
+            return x * x
+
+        def _random64() -> int:
+            return (random.random.randint(0, 0x3FFFFFFF) << 32) | random.random.randint(0, 0xFFFFFFFF)
+
+        def _random64_below(below: int) -> int:
+                return _random64() % below
+
         chosen_stat: T.Optional[StatType] = None
 
         if random.odds(1, 2):
-            chosen_stat = random.choice(list(StatType))
+            # Random stat
+            chosen_stat = random.choice(PRIME_STATS)
+
         else:
-            # favor the best stat so it will tend to clump
-            t = sum(value ** 2 for _stat, value in self.stats)
-            t = random.below(t)
-            chosen_stat = None
-            for stat, value in self.stats:
-                chosen_stat = stat
-                t -= value ** 2
-                if t < 0:
-                    break
+            # Favor highest stat so it will tend to clump
+            t = sum(square(stat) for _, stat in self.stats)
+            t = _random64_below(t)
+            i = -1
+            while t >= 0:
+                i += 1
+                chosen_stat = PRIME_STATS[i % len(PRIME_STATS)]
+                t -= square(self.stats[chosen_stat])
 
         assert chosen_stat is not None
         self.stats.increment(chosen_stat)
