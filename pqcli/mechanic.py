@@ -36,7 +36,7 @@ class SignalMixin:
 
 def level_up_time(level: int) -> int:
     # seconds
-    return 20 * level * 60
+    return int((20 + (1.15 ** level)) * 60)
 
 
 class Bar(SignalMixin):
