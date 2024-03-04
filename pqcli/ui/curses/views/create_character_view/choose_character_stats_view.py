@@ -26,7 +26,7 @@ class ChooseCharacterStatsView(BaseView):
     def start(self) -> None:
         scr_height, scr_width = self.screen.getmaxyx()
 
-        h2 = len(PRIME_STATS) + 2
+        h2 = len(PRIME_STATS) + 4
         h = 7 + h2
         w = 30
         y = (scr_height - h - 2) // 2
@@ -85,7 +85,7 @@ class ChooseCharacterStatsView(BaseView):
         if not self._win or not self._stats_win:
             return
 
-        y, x = self._win.getbegyx()
+        x = self._win.getbegyx()[1]
         stats_h = self._stats_win.getmaxyx()[0]
 
         self._win.erase()
@@ -101,10 +101,25 @@ class ChooseCharacterStatsView(BaseView):
         self._win.noutrefresh()
 
         self._stats_win.erase()
+        total = 0
         for y, stat in enumerate(PRIME_STATS):
             self._stats_win.addstr(
                 y + 1, 1, f"{stat.value}: {self._stats[stat]}"
             )
+            total += self._stats[stat]
+
+        # Define color pairs based on the total value
+        if total < 55:
+            color_pair = 3
+        elif total > 75:
+            color_pair = 2
+        else:
+            color_pair = 1
+
+        # Set the background color based on the total value for each character in the line
+        for x, char in enumerate(f"Total: {total}"):
+            self._stats_win.addch(y + 3, 1 + x, char, curses.color_pair(color_pair))
+
         self._stats_win.box()
         self._stats_win.noutrefresh()
 
