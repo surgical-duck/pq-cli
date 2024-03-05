@@ -9,6 +9,7 @@ KEYS_LEFT = set(map(ord, "hH")) | {curses.KEY_LEFT}
 KEYS_RIGHT = set(map(ord, "lL")) | {curses.KEY_RIGHT}
 KEYS_UP = set(map(ord, "kK")) | {curses.KEY_UP}
 KEYS_CANCEL = set(map(ord, "qQ")) | {curses.ascii.ESC}
+KEYS_RANDOM = set(map(ord, "rR"))
 
 
 @dataclass

@@ -1,8 +1,9 @@
 import functools
 import typing as T
 
+from pqcli import random
 from pqcli.config import CLASSES, Class
-from pqcli.ui.curses.util import KEYS_CANCEL, Choice
+from pqcli.ui.curses.util import KEYS_CANCEL, KEYS_RANDOM, Choice
 from pqcli.ui.curses.views.menu_view import MenuView
 
 
@@ -25,6 +26,14 @@ class ChooseCharacterClassView(MenuView):
                     callback=functools.partial(self.on_confirm, class_),
                 )
             )
+
+        self._choices.append(
+            Choice(
+                keys=list(KEYS_RANDOM),
+                desc="[R] Random",
+                callback=functools.partial(self.on_confirm, class_=random.choice(CLASSES)),
+            )
+        )
 
         self._choices.append(
             Choice(
