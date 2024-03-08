@@ -30,7 +30,7 @@ Basic interface:
 
 ## How to install
 
-If you have Python 3.7, just run `pip install --user pqcli` and you're good to go!
+If you have Python 3.9 or later, just run `pip install --user pqcli` and you're good to go!
 Then type `pqcli` to run the game.
 
 In case if you want to use the git version, the process is just a bit more complex:
@@ -45,8 +45,8 @@ $ pip install --user .
 
 ```sh
 # Clone the repository:
-git clone https://github.com/rr-/pqcli.git
-cd pqcli
+git clone https://github.com/rr-/pq-cli.git
+cd pq-cli
 
 # Install to a local venv:
 poetry install
