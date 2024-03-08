@@ -2,10 +2,10 @@
 name = "pqcli"
 version = "1.0.2"
 description = "Progress Quest: the CLI edition"
-authors = ["Marcin Kurczewski <rr-@sakuya.pl>"]
+authors = ["surgical-duck" <>, "Marcin Kurczewski <rr-@sakuya.pl>"]
 license = "MIT"
 readme = "README.md"
-repository = "https://github.com/rr-/pq-cli.git"
+repository = "https://github.com/surgical-duck/pq-cli.git"
 classifiers = [
     "Environment :: Console",
     "Development Status :: 4 - Beta",
