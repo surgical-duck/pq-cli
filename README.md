@@ -10,14 +10,38 @@ Relive the great adventure… this time in the terminal realm!
 
 ## Features
 
-- Faithful port of the game logic
-- Saves (with backups) to `$XDG_CONFIG_HOME/pqcli/save.dat`
-- Terminal interface that comes in 2 flavors:
-    - Rich and colorful (`--curses`, default)
-    - Minimal, suitable for raw grind (`--basic`)
-- Ideal to run on your server
+- Faithful port of the game logic.
+- Ideal to run on your server.
+- Saves with backups to `$XDG_CONFIG_HOME/pqcli/save.dat`, which defaults to `C:/Users/<username>/.config/pqcli/` on Windows and `/home/<username>/.config/pqcli/` on Unix.
 
-## How it looks like
+## How to install
+
+If you have Python 3.9 or later, just run `pip install --user pqcli` and you're good to go!
+Then type `pqcli` to run the game.
+
+In case if you want to use the git version, the process is just a bit more complex:
+
+```console
+$ git clone https://github.com/surgical-duck/pq-cli.git
+$ cd pq-cli
+$ pip install --user .
+```
+
+## Run with flags
+`python -m pqcli ...`
+
+`--curses` Rich and colorful, default.
+
+`--basic` Minimal UI, suitable for raw grind.
+
+`--load-save <int>` to instantly start playing on the specified character in the roster.
+
+`--list-saves` List saved characters and exit.
+
+`--no-colors` Disable color highlighting in curses interface.
+
+`--no-save` No progress will be saved.
+
 
 Curses interface:
 
@@ -28,24 +52,12 @@ Basic interface:
 
 ![Screenshot](screen-basic.png)
 
-## How to install
-
-If you have Python 3.9 or later, just run `pip install --user pqcli` and you're good to go!
-Then type `pqcli` to run the game.
-
-In case if you want to use the git version, the process is just a bit more complex:
-
-```console
-$ git clone https://github.com/rr-/pq-cli.git
-$ cd pq-cli
-$ pip install --user .
-```
 
 ## Contributing
 
 ```sh
 # Clone the repository:
-git clone https://github.com/rr-/pq-cli.git
+git clone https://github.com/surgical-duck/pq-cli.git
 cd pq-cli
 
 # Install to a local venv:
